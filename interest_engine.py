@@ -1,6 +1,7 @@
 import flickrapi
 import urllib2
 
+
 # get the flickr lib here http://stuvel.eu/projects/flickrapi
 api_key = '677baa52240b5f6988cf3f13c0791428'
 
