@@ -1,11 +1,15 @@
 import flickrapi
 import urllib2
 
+# get the flickr lib here http://stuvel.eu/projects/flickrapi
 api_key = '677baa52240b5f6988cf3f13c0791428'
 
-flickr = flickrapi.FlickrAPI(api_key)
-photos = flickr.photos_search(user_id='73509078@N00', per_page='10')
-sets = flickr.photosets_getList(user_id='73509078@N00')
+flickr = flickrapi.FlickrAPI(api_key, format='etree')
+interesting_photos = flickr.interestingness_getList(extras = 'url_sq')
 
-for photo in photos:
-	print photo
+print dir(interesting_photos)
+print interesting_photos
+print interesting_photos.items
+
+for photo in interesting_photos.getiterator('photo'):
+	print photo.attrib['url_sq']
