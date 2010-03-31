@@ -29,7 +29,7 @@ Network nn;
 int trainingCount;  
 
 // We will train 5,000 iterations
-int maxTrainingIterations = 500;
+int maxTrainingIterations = 5000;
 
 // The input image from the user
 PImage inputImage;
@@ -37,7 +37,7 @@ PImage inputImage;
 // states...
 int state = 0;
 final int WELCOME = 0;
-final int TRAINING = 1;
+final int TRAINING = 1; 
 final int LOAD_FILE = 2;
 final int GUESSING = 3;
 final int RESULT = 4;
@@ -46,6 +46,7 @@ final int RESULT = 4;
 float guess = 0;
 
 PFont font;
+PFont smallFont;
 
 void setup() {
   size(450, 450);
@@ -55,14 +56,15 @@ void setup() {
   loadTrainingImages();
 
   // Setup network
-  nn = new Network(w*h,16);
+  nn = new Network(w*h,36);
 
   // Load the input image
   //inputImage = loadImage("images/2.gif");
 
   // Set up the font
-  font = loadFont("DIN-Bold-20.vlw"); 
-  textFont(font);
+  font = loadFont("DIN-Bold-20.vlw");
+  smallFont = loadFont("DIN-Bold-10.vlw");
+  textFont(smallFont);
   
   // Set up the buttons
   controlP5 = new ControlP5(this);
@@ -108,7 +110,7 @@ void drawWelcome() {
 void drawResult() {
   println(guess);
   image(inputImage, 0, 0);  
-  image(trainingImages[floor(guess)], 75, 0);
+  image(trainingImages[round(guess)], 75, 0);
 }
 
 
@@ -151,9 +153,14 @@ float[] getPixels(PImage img) {
   float[] binaryPixels = new float[w*h];
   for (int pix = 0; pix < w*h; pix++) {
     float b = brightness(img.pixels[pix]);
+    
     // Each pixel is back or white (1 or 0)
     if (b > 128) binaryPixels[pix] = 1;
     else binaryPixels[pix] = 0;
+    
+    binaryPixels[pix] = map(b, 0, 255, 0, 1);
+    //println(binaryPixels[pix]);
+    
   }
   return binaryPixels;
 }
@@ -170,7 +177,10 @@ void train() {
     // Look at the pixels for that number
     float[] pixies = (float[]) pixelData.get(num);  
     // Train the network according to those pixels
-    nn.train(pixies, (float)num/total);
+    nn.train(pixies, (float)num / total);
+    
+    // nn.train(pixies,num);
+    
     // Increase the training iteration count
     trainingCount++;
   }
@@ -179,7 +189,7 @@ void train() {
 
 // A little welcome message
 void welcome() {
-  text("word", 15, 15); 
+  
 }
 
 void guess() {
@@ -188,12 +198,13 @@ void guess() {
   // Here is the result
   guess = result * total;
   state = RESULT;
+  controlP5.addButton("doneButton",0, (width - 80) / 2, height - 40,80,20);  
 }
 
 // Display info about the training
 void drawTraining() {
   pushMatrix();
-  translate(20,150);
+  translate(20,10);
   textAlign(LEFT);
 
   // How much training is complete
@@ -205,7 +216,6 @@ void drawTraining() {
   rect(5,5,width/2,10);
   fill(0);
   rect(5,5,statusBar,10);
-  text("Training. . .",5,30);
 
   // Now we'll show what the network is currently guessing for each input image
   fill(0);
@@ -214,14 +224,14 @@ void drawTraining() {
     float[] inp = (float[]) pixelData.get(i); 
     float known = (float) i/total;
     float result = nn.feedForward(inp);
-    text("My guess for image # " + i + " is " + nf((float)result * total,1,2),5,100+i*20);
+    text("My guess for image # " + i + " is " + nf((float)result * total,1,2),5,65+i*10);
     mse += (result - known)*(result - known);
   }
   // How many interations
-  text("Total iterations: " + trainingCount,5,60);
+  text("Total iterations: " + trainingCount,5,30);
   // Root mean squarted error
   float rmse = sqrt(mse/pixelData.size());
-  text("Root mean squared error: " + nf(rmse,1,4), 5,80);
+  text("Root mean squared error: " + nf(rmse,1,4), 5,43);
   // If we've finished training
   if (percentage >= 1.0) {
     controlP5.addButton("loadButton",0, (width - 80) / 2, height - 40,80,20); 
@@ -240,6 +250,11 @@ public void loadButton(int theValue) {
   controlP5.remove("loadButton");
   println("open load window");
   loadFile();
+}
+
+public void doneButton(int theValue) {
+    controlP5.addButton("loadButton",0, (width - 80) / 2, height - 40,80,20); 
+    state = LOAD_FILE;
 }
 
 
