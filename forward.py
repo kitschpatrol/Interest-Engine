@@ -181,6 +181,22 @@ class NN:
                 self.test(patterns, _print=True)
                 break
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     ################################################
             # visual interface
             #comment out the next 3 functions if

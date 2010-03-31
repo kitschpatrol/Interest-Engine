@@ -10,34 +10,54 @@
 			<key>filename</key>
 			<string>interest_engine.py</string>
 			<key>lastUsed</key>
-			<date>2010-03-30T20:03:50Z</date>
+			<date>2010-03-30T21:24:57Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>hopfield.py</string>
 			<key>lastUsed</key>
-			<date>2010-03-30T20:03:50Z</date>
+			<date>2010-03-30T21:24:57Z</date>
 			<key>selected</key>
 			<true/>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>forward.py</string>
+			<key>lastUsed</key>
+			<date>2010-03-30T21:24:56Z</date>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
 	<integer>206</integer>
 	<key>metaData</key>
 	<dict>
+		<key>forward.py</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>27</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>11</integer>
+		</dict>
 		<key>hopfield.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>33</integer>
+				<integer>21</integer>
 				<key>line</key>
-				<integer>20</integer>
+				<integer>151</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>83</integer>
 		</dict>
 		<key>interest_engine.py</key>
 		<dict>
@@ -58,10 +78,11 @@
 	<array>
 		<string>interest_engine.py</string>
 		<string>hopfield.py</string>
+		<string>forward.py</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{44, 4}, {1127, 874}}</string>
+	<string>{{234, 87}, {1127, 874}}</string>
 </dict>
 </plist>
