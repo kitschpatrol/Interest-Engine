@@ -34,12 +34,6 @@ int maxTrainingIterations = 500;
 // The input image from the user
 PImage inputImage;
 
-// Some booleans to keep track of what is going on
-boolean welcome = true;
-boolean training = false;
-boolean trainingComplete = false;
-boolean guessing = false;
-
 // states...
 int state = 0;
 final int WELCOME = 0;
@@ -69,13 +63,13 @@ void setup() {
   // Set up the font
   font = loadFont("DIN-Bold-20.vlw"); 
   textFont(font);
-
-  state = WELCOME;
   
   // Set up the buttons
   controlP5 = new ControlP5(this);
   controlP5.addButton("trainButton",0, (width - 80) / 2, height - 40,80,20);  
-
+  
+  // Set the initial state
+  state = WELCOME;
 }
 
 void draw() {
@@ -103,23 +97,9 @@ void draw() {
       drawResult();
       break;      
   }
-  
-
-
-  // Draw the guessing image and training images
-  //  noFill();
-  //  stroke(0);
-  //  strokeWeight(1);
-  //  image(inputImage,0,0);
-  //  rect(0,0,w,h);
-  //  for (int i = 0; i < trainingImages.length; i++) {
-  //    image(trainingImages[i],(i+1)*w,0);
-  //    rect((i+1)*w,0,w,h);
-  //  }
 }
 
 void drawWelcome() {
-  println(trainingImages.length);
   for(int i = 0; i < trainingImages.length; i++) {
     image(trainingImages[i], (i % 6) * w, (i / 6) * h); 
   }
