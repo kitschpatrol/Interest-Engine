@@ -15,7 +15,7 @@ int w = 18;
 int h = 24;
 
 // How many numbers are we going to try to guess
-int total = 8; // Just doing 0's and 1's, but this will sort of work for more.
+int total = 2; // Just doing 0's and 1's, but this will sort of work for more.
 // Here are the training images
 PImage[] trainingImages = new PImage[total];
 
@@ -26,7 +26,7 @@ Network nn;
 int trainingCount;  
 
 // We will train 5,000 iterations
-int maxTrainingIterations = 50000;
+int maxTrainingIterations = 15000;
 
 // A submit button
 Button submit;
